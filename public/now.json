@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "name": "stock-tweets",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ]
+}

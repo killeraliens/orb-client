@@ -10,7 +10,7 @@ function Header() {
   socket = socketIOClient(endpoint)
   return(
     <header>
-      <h1>FEED ME</h1>
+      <h1>Killeraliens Stock Tweets</h1>
       <NavLink to="/">Date</NavLink>
       {' '}
       <NavLink to="tweets" >Tweets</ NavLink>
