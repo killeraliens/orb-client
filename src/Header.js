@@ -1,17 +1,19 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import socketIOClient from "socket.io-client";
 import config from "./config"
 
 let socket
 function Header() {
-  const [endpoint, setEndpoint] = useState(`${ config.SERVER_ENDPOINT }/`)
+  const [query, setQuery] = useState('?symbol=abc')
+  const [endpoint, setEndpoint] = useState(`${ config.SERVER_ENDPOINT + query }`)
   socket = socketIOClient(endpoint)
   return(
     <header>
       <h1>FEED ME</h1>
-      <Link to="/">Date</Link>
-      <Link to="tweets" >Tweets</Link>
+      <NavLink to="/">Date</NavLink>
+      {' '}
+      <NavLink to="tweets" >Tweets</ NavLink>
     </header>
   )
 }

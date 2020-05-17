@@ -5,17 +5,13 @@ export default function DateFeed() {
   const [response, setResponse] = useState('')
 
   useEffect(() => {
-    let isCancelled = false
-    socket.on('FromAPI', data => {
-      // console.log('date api hits', data)
-      if (!isCancelled) {
-        setResponse(data)
-      }
+    socket.on('get_date', data => {
+      console.log('date api hits', data)
+      setResponse(data)
     })
 
     return () => {
-      socket.off('FromAPI')
-      isCancelled = true
+      socket.off('get_date')
     }
   }, [])
 
