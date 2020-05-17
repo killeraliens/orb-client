@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 // import socketIOClient from "socket.io-client";
 // import config from "./config"
 import { Switch, Route } from 'react-router-dom'
-import TweetFeed from "./TweetFeed"
-import DateFeed from "./DateFeed"
-import { Header } from './Header'
+import TweetFeed from "./Components/TweetFeed"
+import DateFeed from "./Components/DateFeed"
+import { Header } from './Components/Header'
 
 export default function App() {
 
