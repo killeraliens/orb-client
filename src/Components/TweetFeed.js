@@ -20,10 +20,10 @@ export default function TweetFeed() {
 
   useEffect(() => {
       socket.on('tweet', tweet => {
-        console.log('new tweet', tweet)
-        console.log('existing data', data)
+        // console.log('new tweet', tweet)
+        // console.log('existing data', data)
         const newTweetArr = [ ...initialData, {...tweet} ]
-        console.log('NEW ARR', newTweetArr)
+        // console.log('NEW ARR', newTweetArr)
         setData(newTweetArr)
       })
     return () => {
