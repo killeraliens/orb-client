@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react'
 import { Switch, Route } from 'react-router-dom'
 import TweetFeed from './Components/TweetFeed'
 import { Header } from './Components/Header'
-import AddSymbolForm from './Components/AddSymbolForm'
-import CloseSymbolButton from './Components/CloseSymbolButton'
+import AddForm from './Components/AddForm'
+import Button from './Components/Button'
 import './App.css'
 
 export default function App() {
@@ -11,8 +11,8 @@ export default function App() {
   return (
     <div className='App'>
       {/* <Header /> */}
-      <AddSymbolForm />
-      <CloseSymbolButton />
+      <AddForm />
+      <Button />
       {/* <Switch>
         <Route path="/tweets" component={TweetFeed}/>
       </Switch> */}

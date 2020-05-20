@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import config from "../config"
 
-export default function AddSymbolForm() {
+export default function AddForm() {
   const [symbol, setSymbol] = useState({ value: '', touched: false, error: '' })
   const [fetching, setFetching] = useState(false)
   const [serverError, setServerError] = useState(null)
@@ -48,7 +48,7 @@ export default function AddSymbolForm() {
       method: 'POST',
       body: JSON.stringify(postBody),
       headers: {
-        "Content-Type": "application/json"
+        'Content-Type': 'application/json'
       }
     }
 
@@ -63,10 +63,7 @@ export default function AddSymbolForm() {
         setFetching(false)
         resetForm()
         let { term } = body
-        // updateFilters(term)
         console.log(`Successfully added feed for ${term}`)
-        // setToast({ message: `Successfully added feed for ${term}` })
-        // history.push(`/`)
       }
     } catch (err) {
       setServerError({ message: err.message })
@@ -75,37 +72,34 @@ export default function AddSymbolForm() {
 
   }
 
-  const required = "*"
-  if (fetching) {
-    return <span>loading...</span>
-  }
+  const required = ''
 
   return (
-      <form className="AddSymbolForm" onSubmit={handleOnSubmit}>
+      <form className='AddForm' onSubmit={handleOnSubmit}>
         <fieldset>
-          <label htmlFor="symbol">symbol{required}</label>
+          <label htmlFor='symbol' className=''>${required}</label>
           <input
-            type="text"
-            id="symbol"
-            name="symbol"
+            type='text'
+            id='symbol'
+            name='symbol'
             value={symbol.value || ''}
             onChange={e => setSymbol({ value: e.target.value, touched: true })}
-            aria-label="enter your symbol"
-            aria-required="true"
-            aria-describedby="symbolError"
+            aria-label='enter your symbol'
+            aria-required='true'
+            aria-describedby='symbolError'
             aria-invalid={!!symbol.error}
             onBlur={updateValidationErrors}
           />
-          <span id="symbolError" className='ValidationError'>{symbol.error}</span>
+          <span id='symbolError' className='ValidationError'>{symbol.error}</span>
         </fieldset>
-        <div className="form-controls">
-          <button type="submit" disabled={symbol.error}>Add</button>
+        <div className='form-controls'>
+          <button type='submit' disabled={symbol.error}>Add</button>
         </div>
       </form>
   );
 }
 
-AddSymbolForm.propTypes = {
+AddForm.propTypes = {
   // history: PropTypes.shape({
   //   push: PropTypes.func,
   // })

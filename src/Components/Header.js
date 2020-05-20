@@ -7,7 +7,15 @@ let socket
 function Header() {
   // const [query, setQuery] = useState('?symbol=abc')
   const [endpoint, setEndpoint] = useState(`${ config.SERVER_ENDPOINT }`)
-  socket = socketIOClient(endpoint)
+
+  useEffect(() => {
+    socket = socketIOClient(endpoint)
+    return () => {
+      socket.disconnect()
+      console.log('socket disconnected')
+    }
+  }, [])
+
   return(
     <header>
       <h1>Killeraliens Stock Tweets</h1>
