@@ -1,5 +1,5 @@
 /* App global */
-.App button {
+.Button {
   padding: 0px 12px;
   height: 34px;
   background-color: #00acee;
@@ -7,27 +7,39 @@
   border-radius: 8px;
 }
 
-button.Button {
+.Button svg {
+  margin-left: 8px;
+}
+
+.Params .Button {
+  margin-right: 8px;
+  /* background-color: rgb(64, 232, 98); */
+}
+
+.Params {
+  padding: 32px;
+}
+/* button.Button {
   background-color: rgba(0, 0, 0, 0);
   color: #00acee;
   border: 2px solid #00acee;
-}
+} */
 
 
-form.AddForm {
+.AddForm {
   padding: 32px;
   display: flex;
   background-color: lightgrey;
-  width: min-content;
+  width: max-content;
 }
 
-form.AddForm label {
+.AddForm label {
   position: absolute;
   line-height: 34px;
   left:16px;
 }
 
-form.AddForm input {
+.AddForm input {
   padding: 8px 12px;
   box-shadow: 0 0 8px rgba(0, 0, 0, .1);
   -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .1);
@@ -37,7 +49,7 @@ form.AddForm input {
   margin-right: 8px;
 }
 
-form.AddForm .ValidationError {
+.AddForm .ValidationError {
 display: block;
 position: relative;
 font-size: 12px;
@@ -56,3 +68,6 @@ top: 10px;
   position: absolute;
   width: 1px;
 }
+
+
+

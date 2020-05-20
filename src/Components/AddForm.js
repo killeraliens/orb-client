@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
+import Button from './Button'
 import config from "../config"
 
 export default function AddForm() {
   const [symbol, setSymbol] = useState({ value: '', touched: false, error: '' })
   const [fetching, setFetching] = useState(false)
   const [serverError, setServerError] = useState(null)
-
 
   const resetForm = () => {
     setSymbol({ value: '', touched: false, error: '' })
@@ -32,6 +32,8 @@ export default function AddForm() {
       const trimmedSymbol = symbol.value.trim()
       return trimmedSymbol.length === 0
         ? 'symbol required'
+        : trimmedSymbol.length > 5
+        ? 'symbol is too long'
         : ''
     }
     return ''
@@ -93,7 +95,7 @@ export default function AddForm() {
           <span id='symbolError' className='ValidationError'>{symbol.error}</span>
         </fieldset>
         <div className='form-controls'>
-          <button type='submit' disabled={symbol.error}>Add</button>
+        <Button type='submit' isDisabled={symbol.error}>Add Tweets</Button>
         </div>
       </form>
   );

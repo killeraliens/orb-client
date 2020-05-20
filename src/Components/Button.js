@@ -1,14 +1,20 @@
 import React from 'react'
 
-export default function Button({ value, handleClick }) {
+export default function Button({ value, children, type, isDisabled, handleClick }) {
   return(
-    <button className='Button' onClick={handleClick}>
-      { value }
+    <button
+      value={value}
+      type={!!type ? type : 'button'}
+      className='Button'
+      onClick={handleClick}
+      disabled={!!isDisabled ? isDisabled : false }
+     >
+      { children }
     </button>
   )
 }
 
 Button.defaultProps = {
   value: 'sample',
-  handleClick: () => {}
+  onClick: () => {}
 }
