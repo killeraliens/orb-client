@@ -13,6 +13,7 @@ import './App.css'
 export default function App() {
   const [socket, setSocket] = useState({})
   const [params, setParams] = useState([])
+  const [selected, setSelected] = useState(null)
 
   // useEffect(() => {
   //   const endpoint = config.SERVER_ENDPOINT
@@ -27,9 +28,9 @@ export default function App() {
 
   const addParam = (p) => {
     const newParam = p
-    const newParams = params.length === 0
-      ? params.concat('All').concat(p)
-      : params.concat(p)
+    const newParams = params.length === 1
+      ? ['All', ...params].concat(p)
+      : [...params].concat(p)
     setParams(newParams)
     console.log('added new p', newParam)
   }
