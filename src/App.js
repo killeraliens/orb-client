@@ -12,7 +12,7 @@ import './App.css'
 
 export default function App() {
   const [socket, setSocket] = useState({})
-  const [params, setParams] = useState(['AAPL', 'BAA'])
+  const [params, setParams] = useState([])
 
   // useEffect(() => {
   //   const endpoint = config.SERVER_ENDPOINT
@@ -27,13 +27,20 @@ export default function App() {
 
   const addParam = (p) => {
     const newParam = p
-    const newParams = params.concat(p)
+    const newParams = params.length === 0
+      ? params.concat('All').concat(p)
+      : params.concat(p)
     setParams(newParams)
     console.log('added new p', newParam)
   }
 
   const deleteParam = (p) => {
-    const newParams = params.filter(param => param != p)
+    if (p === 'All') {
+
+    }
+    const newParams = p === 'All'
+      ? []
+      : params.filter(param => param !== p)
     setParams(newParams)
     console.log('deleted p', p)
   }

@@ -2,12 +2,14 @@ import React, { useState, useEffect, useContext } from 'react'
 import Button from './Button'
 import config from '../config'
 import AppContext from '../AppContext'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 
 export default function AddForm() {
   const [symbol, setSymbol] = useState({ value: '', touched: false, error: '' })
   const [fetching, setFetching] = useState(false)
   const [serverError, setServerError] = useState(null)
-  const { addParam } = useContext(AppContext)
+  const { params, addParam } = useContext(AppContext)
 
   const resetForm = () => {
     setSymbol({ value: '', touched: false, error: '' })
@@ -45,8 +47,10 @@ export default function AddForm() {
   const handleOnSubmit = async (e) => {
     e.preventDefault()
     setFetching(true)
+    const newTerm = symbol.value.trim().toUpperCase()
+    const newParams = [...params, newTerm]
     const postBody = {
-      term: symbol.value.trim().toUpperCase(),
+      terms: newParams.filter(param => { if (param !== 'All') return '$' + param } )
     }
     const options = {
       method: 'POST',
@@ -66,9 +70,9 @@ export default function AddForm() {
       } else {
         setFetching(false)
         resetForm()
-        addParam(postBody.term)
-        let { term } = body
-        console.log(`Successfully added feed for ${term}`)
+        addParam(newTerm)
+        let { query } = body
+        console.log(`Successfully added feed for ${query.join(',')}`)
       }
     } catch (err) {
       setServerError(err.message)
@@ -103,7 +107,7 @@ export default function AddForm() {
           <span id='serverError' className='ValidationError'>{serverError}</span>
         </fieldset>
         <div className='form-controls'>
-        <Button type='submit' isDisabled={symbol.error}>Add Tweets</Button>
+        <Button type='submit' isDisabled={symbol.error || symbol.value.length === 0}><FontAwesomeIcon icon={faTwitter}/></Button>
         </div>
       </form>
   );
