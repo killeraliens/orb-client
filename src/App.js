@@ -36,9 +36,6 @@ export default function App() {
   }
 
   const deleteParam = (p) => {
-    if (p === 'All') {
-
-    }
     const newParams = p === 'All'
       ? []
       : params.filter(param => param !== p)
