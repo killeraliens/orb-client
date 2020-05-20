@@ -26,14 +26,16 @@ export default function App() {
   // }, [])
 
   const addParam = (p) => {
-    const newParam = p.toUpperCase()
+    const newParam = p
+    const newParams = params.concat(p)
+    setParams(newParams)
     console.log('added new p', newParam)
   }
 
   const deleteParam = (p) => {
-    console.log('deleted p', p)
     const newParams = params.filter(param => param != p)
     setParams(newParams)
+    console.log('deleted p', p)
   }
 
   const context = {

@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import Button from './Button'
-import config from "../config"
+import config from '../config'
+import AppContext from '../AppContext'
 
 export default function AddForm() {
   const [symbol, setSymbol] = useState({ value: '', touched: false, error: '' })
   const [fetching, setFetching] = useState(false)
   const [serverError, setServerError] = useState(null)
+  const { addParam } = useContext(AppContext)
 
   const resetForm = () => {
     setSymbol({ value: '', touched: false, error: '' })
@@ -44,7 +46,7 @@ export default function AddForm() {
     e.preventDefault()
     setFetching(true)
     const postBody = {
-      term: symbol.value.trim(),
+      term: symbol.value.trim().toUpperCase(),
     }
     const options = {
       method: 'POST',
@@ -58,17 +60,18 @@ export default function AddForm() {
       const response = await fetch(`${config.SERVER_ENDPOINT}/set-symbol`, options)
       const body = await response.json();
       if (!response.ok) {
-        setServerError({ status: response.status, message: body.message })
+        setServerError(response.message)
         setFetching(false)
-        console.log('RES', response)
+        console.log('response not ok', response)
       } else {
         setFetching(false)
         resetForm()
+        addParam(postBody.term)
         let { term } = body
         console.log(`Successfully added feed for ${term}`)
       }
     } catch (err) {
-      setServerError({ message: err.message })
+      setServerError(err.message)
       setFetching(false)
     }
 
@@ -77,7 +80,11 @@ export default function AddForm() {
   const required = ''
 
   return (
-      <form className='AddForm' onSubmit={handleOnSubmit}>
+    <form
+      className='AddForm'
+      onSubmit={handleOnSubmit}
+      aria-describedby='serverError'
+      >
         <fieldset>
           <label htmlFor='symbol' className=''>${required}</label>
           <input
@@ -93,16 +100,11 @@ export default function AddForm() {
             onBlur={updateValidationErrors}
           />
           <span id='symbolError' className='ValidationError'>{symbol.error}</span>
+          <span id='serverError' className='ValidationError'>{serverError}</span>
         </fieldset>
         <div className='form-controls'>
         <Button type='submit' isDisabled={symbol.error}>Add Tweets</Button>
         </div>
       </form>
   );
-}
-
-AddForm.propTypes = {
-  // history: PropTypes.shape({
-  //   push: PropTypes.func,
-  // })
 }
