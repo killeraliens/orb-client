@@ -96,7 +96,7 @@ export default function AddSymbolForm() {
             aria-invalid={!!symbol.error}
             onBlur={updateValidationErrors}
           />
-          <span id="symbolError">{symbol.error}</span>
+          <span id="symbolError" className='ValidationError'>{symbol.error}</span>
         </fieldset>
         <div className="form-controls">
           <button type="submit" disabled={symbol.error}>Add</button>
